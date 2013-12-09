@@ -49,7 +49,7 @@ public class TraitementVol
 				afficherEpreuve8();
 				break;
 			case 10:
-				afficherEpreuve10();
+				//afficherEpreuve10();
 				break;
 			default :
 				System.out.println("Cette option n'existe pas, choissisez en une autre.");
