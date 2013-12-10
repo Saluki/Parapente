@@ -28,11 +28,28 @@ public class Vol
 		return this.tableCoordonnees.length-1;
 	}
 	
+	/**
+	 * Cette methode renvoie la duree du vol jusqu'a la distance la plus eloignee
+	 * L'unité de temps correspond à l'indice de la coordonnee
+	 * @return la duree jusqu'au point max
+	 */
+	public int dureePointMax() {
+		return indiceDistanceMax();
+	}
+	
 	private double arrondir(double distance)
 	{
 		return Math.round(distance*10000.0)/10000.0;
 	}
-
+   
+   /**
+	 * Cette methode renvoie les coordon�e de la table � l'indice choisi.
+	 * 
+	 * @return les coordonees
+	 */
+	public Coordonnees retourCoordonnees(int indice) {
+		return this.tableCoordonnees[indice] ;
+	}
 
 	/**
 	 * Cette methode calcule la distance parcourue. Cette distance sera
@@ -43,6 +60,20 @@ public class Vol
 	public double distance() {
 		double distance = 0;
       for ( int i = 1 ; i < this.tableCoordonnees.length ; i++ ){
+        distance = distance + this.tableCoordonnees[i].distance(this.tableCoordonnees[i-1]) ;
+      }
+		return distance;
+	}
+   
+    /**
+	 * Cette methode calcule la distance parcourue jusqu'à l'indice de la coordonnée voulu. Cette 
+	 * distance sera obtenue en additionnant les distances des segments du vol jusqu'à l'indice demandé.
+	 * 
+	 * @return la distance parcourue
+	 */
+	public double distanceIndice(int indice) {
+	  double distance = 0;
+      for ( int i = 1 ; i < indice+1 ; i++ ){
         distance = distance + this.tableCoordonnees[i].distance(this.tableCoordonnees[i-1]) ;
       }
 		return distance;
@@ -60,6 +91,46 @@ public class Vol
 		//double distanceMax = 0;
 	   return 0.00;
    }
+   
+   /**
+	 * Cette methode calcule la distance la plus éloigné par rapport au point d'origine. Cette distance sera
+	 * obtenue en comparant tout les segements des coordonées par rapport au point de départ . Ensuite nous 
+	 * enregistrons l'indice du segment le plus grand .
+    *
+	 * @return l'indice de la distance la plus longue à vol d'oiseau par rapport au point de départ
+	 */
+   public int indiceDistanceMax() {
+		double distanceMax = 0;
+      int indiceMax = 0 ;
+     
+      for ( int i = 0 ; i < this.tableCoordonnees.length ; i++ ){
+         if (  this.tableCoordonnees[0].distance(this.tableCoordonnees[i])> distanceMax ){  
+            distanceMax = this.tableCoordonnees[0].distance(this.tableCoordonnees[i]) ;
+            indiceMax = i ;
+           
+         }
+      }
+      return indiceMax ;
+      
+	}
+   
+   /**
+	 * Cette methode renvoie les coordonnees du lieux le plus eloigne .
+	 * On utilise deux methodes : retourCoordonnee et indiceDistanceMax 
+	 * @return les coordonnees les plus eloignes
+	 */
+	public Coordonnees pointLePlusLoin() {
+		return this.retourCoordonnees(this.indiceDistanceMax()) ;
+	}
+   
+   /**
+	 * Cette methode renvoie la distance parcourue pour atteindre le plus le plus eloigne .
+	 * On utilise deux méthodes : distanceIndice et indiceDistanceMax 
+	 * @return distance parcourue jusqu'au point le plus eloigne 
+	 */
+	public double distancePointMax() {
+		return this.distanceIndice(this.indiceDistanceMax()) ;
+	}
    
    /**
      * Calcule la plus longue distance d'une intersection de n unites de temps.
@@ -283,28 +354,60 @@ public class Vol
 	 * @param    perimetre          le perimetre en kilometres
 	 * @return                      le temps de survol en unites de temps
 	 */
-	public int dureePlusLongSurvol(Coordonnees cibleDeReference, double perimetre)
-	{
-		int pointsMax=0, sommePoints = 0;
-		
-		for(int compteur=0; compteur < this.tableCoordonnees.length; compteur++)
-		{	
-			double distanceEntrePoints = distanceCible(cibleDeReference, this.tableCoordonnees[compteur]);
-			
-			if( distanceEntrePoints <= perimetre)	// Si le point est dans le perimetre
-			{
-				sommePoints++;
-			}
-			else	// Sinon, remet le compteur a 0
-			{
-				if( sommePoints > pointsMax )
-					pointsMax = sommePoints;
-				
-				sommePoints = 0;
-			}
-			
-		}
-		
-		return pointsMax - 1; // Unites de temps = nb de points - 1
+	public int dureePlusLongSurvol(Coordonnees cibleDeReference, double perimetre){
+   
+      int pointsMax=0, sommePoints = 0;
+   		
+   		for(int compteur=0; compteur < this.tableCoordonnees.length; compteur++)
+   		{	
+   			double distanceEntrePoints = distanceCible(cibleDeReference, this.tableCoordonnees[compteur]);
+   			
+   			if( distanceEntrePoints <= perimetre)	// Si le point est dans le perimetre
+   			{
+   				sommePoints++;
+               if ( compteur == this.tableCoordonnees.length-1 ) pointsMax = pointsMax + sommePoints-1 ;
+   			}
+   			else	// Sinon, remet le compteur a 0
+   			{
+               if (  sommePoints > 1 ) pointsMax = pointsMax + sommePoints-1 ;   
+   				
+   				sommePoints = 0;
+   			}
+   			
+   		}
+   		
+   		return pointsMax ; // Unites de temps = nb de points
+   }
+   
+   /**
+	 * Cette methode verifie le nombre de fois qu'un vol croise les segments de couple d'obstacle ( les portes ).  
+	 * Ces portes doivent etre franchies dans l'ordre .  
+    * Un nombre de point sera calculer selon le nombre de portes franchient 
+	 * 
+	 * @return le nombre de traversee reussi
+	 */
+   public int traverseePortes( Coordonnees[] portes) {
+   int point = 0 ;
+   int j = 0 ;
+   boolean croiser = false ;
+     
+      for ( int i = 0 ; i < portes.length-1 ; i++ ){
+         
+         croiser = false ;
+         
+         while ( j < this.tableCoordonnees.length-1 && croiser == false ) {
+         
+            if (  Coordonnees.segmentsCroises(portes[i], portes[i+1], this.tableCoordonnees[j], this.tableCoordonnees[j+1])) {
+               point++ ;
+               croiser = true ;     
+            }
+            j++ ;
+         }
+         i++ ;  //pour passer directement aux coordonnee de la porte suivante    
+      }
+      return point ;
+      
 	}
+
+
 }
