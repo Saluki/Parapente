@@ -19,6 +19,7 @@ public class TraitementVol
 		System.out.println("| _ \\/_\\ | _ \\  /_\\ | _ \\ __| \\| |_   _| __|");
 		System.out.println("|  _/ _ \\|   / / _ \\|  _/ _|| .` | | | | _| ");
 		System.out.println("|_|/_/ \\_\\_|_\\/_/ \\_\\_| |___|_|\\_| |_| |___|\n");
+		System.out.println("Github \u001B[32mhttps://github.com/saluki/parapente.git\u001B[0m\n");
 		
 		System.out.println("\nAnalyse de ton vol\n==================\n");
 		vol = chargerVol();
@@ -27,11 +28,14 @@ public class TraitementVol
 			choix = lireChoix();
 			switch (choix) {
 			case 1:
-				epreuve1();
-				break;
-            case 3:
-				epreuve3();
-				break;
+            	afficherEpreuve1();
+            	break;
+            case 2:
+            	afficherEpreuve2();
+            	break;
+			case 3:
+            	afficherEpreuve3();
+            	break;	
             case 4:
             	afficherEpreuve4();
             	break;
@@ -47,8 +51,11 @@ public class TraitementVol
 			case 8:
 				afficherEpreuve8();
 				break;
+			case 9:
+				afficherEpreuve9();
+				break;	
 			case 10:
-				afficherEpreuve10();
+				//afficherEpreuve10();
 				break;
 			default :
 				System.out.println("Cette option n'existe pas, choissisez en une autre.");
@@ -75,7 +82,8 @@ public class TraitementVol
 		                          "S’approcher le plus pres possible d’une cible",
 		                          "Atteindre plusieurs cibles",
 		                          "Suivre un parcours",
-		                          "Faire du sur place"};
+		                          "Faire du sur place",
+                                "SLALOM"};
 		System.out.println("\nFais ton choix \n==============\n");
 	
 		for(int compteurMenu=0; compteurMenu < listeEpreuves.length; compteurMenu++)
@@ -147,11 +155,18 @@ public class TraitementVol
 		return cibles;
 	}
 	
-	public static void epreuve1(){
+	public static void afficherEpreuve1(){
 		System.out.println("\nTon vol a dure "+vol.duree()+ " unites temps.");
 	}
-   
-    public static void epreuve3(){
+    
+	public static void afficherEpreuve2(){
+		System.out.println("\nLe lieu le plus eloigne se trouve à "+ vol.pointLePlusLoin() );
+		System.out.println("\nSa distance en vol d'oiseau est de "+ vol.retourCoordonnees(0).distance(vol.pointLePlusLoin())+ "km" );
+		System.out.println("\nLa distance parcourue jusqu'à ce point est de "+ vol.distancePointMax()+ "km"  ) ;
+		System.out.println("\nTon vol a dure "+vol.dureePointMax()+ " unites temps jusqu'au point le plus eloigne");
+	}
+	
+    public static void afficherEpreuve3(){
 		System.out.println("\nLa distance du vol est de "+vol.distance()+ " km.");
 	}
 	
@@ -260,6 +275,19 @@ public class TraitementVol
 		double perimetre = Utilitaires.lireUnEntierStrictementPositif();
 		
 		System.out.print("\nLe plus long survol est de " + vol.dureePlusLongSurvol(cibleRef, perimetre) + " unites de temps.\n");
+	}
+   
+   /**
+	 * Affiche les resultats de l'epreuve 9.
+	 * L'utilisateur definit des couples de cibles qui forme une porte.
+	 * Le planeur doit passer entre les portes pour obtenir des points
+	 * 
+	 */
+	public static void afficherEpreuve9()
+	{
+		Coordonnees[] portes = TraitementVol.creerParcours();
+		
+	   System.out.println("\nNombre de porte franchie  :"+ " " + vol.traverseePortes( portes )+ " sur " +  ( portes.length/2 )  );
 	}
 
 	/**
