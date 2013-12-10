@@ -19,7 +19,6 @@ public class TraitementVol
 		System.out.println("| _ \\/_\\ | _ \\  /_\\ | _ \\ __| \\| |_   _| __|");
 		System.out.println("|  _/ _ \\|   / / _ \\|  _/ _|| .` | | | | _| ");
 		System.out.println("|_|/_/ \\_\\_|_\\/_/ \\_\\_| |___|_|\\_| |_| |___|\n");
-		System.out.println("Github \u001B[32mhttps://github.com/saluki/parapente.git\u001B[0m\n");
 		
 		System.out.println("\nAnalyse de ton vol\n==================\n");
 		vol = chargerVol();
