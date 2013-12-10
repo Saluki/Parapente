@@ -144,12 +144,11 @@ public class TraitementVol
 		int nombreDeCibles = Utilitaires.lireUnEntierComprisEntre(1,20);
 		
 		Coordonnees[] cibles = new Coordonnees[nombreDeCibles];
-		int compteur = 0;
 		
-		while( compteur < nombreDeCibles )
+		for(int compteur=0; compteur < nombreDeCibles; compteur++)
 		{	
+			System.out.println("\nDeclaration de la cible #" + (compteur+1) );
 			cibles[compteur] = TraitementVol.lireCoordonnees();
-			compteur++;
 		}
 		
 		return cibles;
@@ -287,7 +286,7 @@ public class TraitementVol
 	{
 		Coordonnees[] portes = TraitementVol.creerParcours();
 		
-	   System.out.println("\nNombre de porte franchie  :"+ " " + vol.traverseePortes( portes )+ " sur " +  ( portes.length/2 )  );
+		System.out.println("\nNombre de porte franchie  :"+ " " + vol.traverseePortes( portes )+ " sur " +  ( portes.length/2 )  );
 	}
 
 	/**

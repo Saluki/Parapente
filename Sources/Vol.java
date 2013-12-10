@@ -30,7 +30,7 @@ public class Vol
 	
 	/**
 	 * Cette methode renvoie la duree du vol jusqu'a la distance la plus eloignee
-	 * L'unité de temps correspond à l'indice de la coordonnee
+	 * L'unitÃ© de temps correspond Ã  l'indice de la coordonnee
 	 * @return la duree jusqu'au point max
 	 */
 	public int dureePointMax() {
@@ -43,7 +43,7 @@ public class Vol
 	}
    
    /**
-	 * Cette methode renvoie les coordon�e de la table � l'indice choisi.
+	 * Cette methode renvoie les coordonée de la table à l'indice choisi.
 	 * 
 	 * @return les coordonees
 	 */
@@ -66,8 +66,8 @@ public class Vol
 	}
    
     /**
-	 * Cette methode calcule la distance parcourue jusqu'à l'indice de la coordonnée voulu. Cette 
-	 * distance sera obtenue en additionnant les distances des segments du vol jusqu'à l'indice demandé.
+	 * Cette methode calcule la distance parcourue jusqu'Ã  l'indice de la coordonnÃ©e voulu. Cette 
+	 * distance sera obtenue en additionnant les distances des segments du vol jusqu'Ã  l'indice demandÃ©.
 	 * 
 	 * @return la distance parcourue
 	 */
@@ -93,11 +93,11 @@ public class Vol
    }
    
    /**
-	 * Cette methode calcule la distance la plus éloigné par rapport au point d'origine. Cette distance sera
-	 * obtenue en comparant tout les segements des coordonées par rapport au point de départ . Ensuite nous 
+	 * Cette methode calcule la distance la plus Ã©loignÃ© par rapport au point d'origine. Cette distance sera
+	 * obtenue en comparant tout les segements des coordonÃ©es par rapport au point de dÃ©part . Ensuite nous 
 	 * enregistrons l'indice du segment le plus grand .
     *
-	 * @return l'indice de la distance la plus longue à vol d'oiseau par rapport au point de départ
+	 * @return l'indice de la distance la plus longue Ã  vol d'oiseau par rapport au point de dÃ©part
 	 */
    public int indiceDistanceMax() {
 		double distanceMax = 0;
@@ -125,7 +125,7 @@ public class Vol
    
    /**
 	 * Cette methode renvoie la distance parcourue pour atteindre le plus le plus eloigne .
-	 * On utilise deux méthodes : distanceIndice et indiceDistanceMax 
+	 * On utilise deux mÃ©thodes : distanceIndice et indiceDistanceMax 
 	 * @return distance parcourue jusqu'au point le plus eloigne 
 	 */
 	public double distancePointMax() {
