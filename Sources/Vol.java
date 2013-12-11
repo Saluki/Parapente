@@ -43,12 +43,31 @@ public class Vol
 	}
    
    /**
-	 * Cette methode renvoie les coordonée de la table à l'indice choisi.
+	 * Cette methode renvoie les coordonee de la table a l'indice choisi.
 	 * 
 	 * @return les coordonees
 	 */
 	public Coordonnees retourCoordonnees(int indice) {
 		return this.tableCoordonnees[indice] ;
+	}
+   
+   /**
+	 * Cette methode renvoie les coordonnees du point de depart .
+	 * On utilise la methodes : retourCoordonnee a l'indice 0 
+	 * @return les coordonnees du point de depart 
+	 */
+	public Coordonnees pointDeDepart() {
+		return this.retourCoordonnees(0) ;
+	}
+   
+   
+   /**
+	 * Cette methode renvoie les coordonnees du lieux le plus eloigne .
+	 * On utilise deux methodes : retourCoordonnee et indiceDistanceMax 
+	 * @return les coordonnees les plus eloignes
+	 */
+	public Coordonnees pointLePlusLoin() {
+		return this.retourCoordonnees(this.indiceDistanceMax()) ;
 	}
 
 	/**
@@ -114,22 +133,14 @@ public class Vol
       
 	}
    
-   /**
-	 * Cette methode renvoie les coordonnees du lieux le plus eloigne .
-	 * On utilise deux methodes : retourCoordonnee et indiceDistanceMax 
-	 * @return les coordonnees les plus eloignes
-	 */
-	public Coordonnees pointLePlusLoin() {
-		return this.retourCoordonnees(this.indiceDistanceMax()) ;
-	}
    
    /**
 	 * Cette methode renvoie la distance parcourue pour atteindre le plus le plus eloigne .
 	 * On utilise deux mÃ©thodes : distanceIndice et indiceDistanceMax 
 	 * @return distance parcourue jusqu'au point le plus eloigne 
 	 */
-	public double distancePointMax() {
-		return this.distanceIndice(this.indiceDistanceMax()) ;
+	public double distanceParcourueAuPointMax() {
+		return arrondir( this.distanceIndice(this.indiceDistanceMax())) ;
 	}
    
    /**
@@ -325,7 +336,7 @@ public class Vol
 	/**
 	 * Renvoie le nombre de cibles qui ont etes atteintes dans l'ordre
 	 * sur base d'un tableau de cibles.
-	 * Cette methode a ete concue pour l'epreuve 6.
+	 * Cette methode a ete concue pour l'epreuve 7.
 	 * 
 	 * @param    ciblesEnOrdre   une table de coordonnees avec les cibles
 	 * @return                   le nombre de cibles atteintes

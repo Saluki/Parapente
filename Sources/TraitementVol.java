@@ -28,18 +28,18 @@ public class TraitementVol
 			choix = lireChoix();
 			switch (choix) {
 			case 1:
-            	afficherEpreuve1();
-            	break;
-            case 2:
-            	afficherEpreuve2();
-            	break;
+            afficherEpreuve1();
+            break;
+         case 2:
+            afficherEpreuve2();
+            break;
 			case 3:
-            	afficherEpreuve3();
-            	break;	
-            case 4:
-            	afficherEpreuve4();
-            	break;
-            case 5:
+            afficherEpreuve3();
+            break;	
+         case 4:
+            afficherEpreuve4();
+            break;
+         case 5:
 				afficherEpreuve5();
 				break;
 			case 6:
@@ -74,16 +74,16 @@ public class TraitementVol
 	 */
 	private static int lireChoix()
 	{
-		String [] listeEpreuves =  {"Quitter le programme",
-								  "Rester le plus longtemps dans l’air", 
-		                          "Aller le plus loin possible",
-		                          "Parcourir la plus longue distance",
-		                          "Parcourir la plus longue distance sur un temps imparti",
-		                          "S’approcher le plus pres possible d’une cible",
-		                          "Atteindre plusieurs cibles",
-		                          "Suivre un parcours",
-		                          "Faire du sur place",
-                                "SLALOM"};
+		String [] listeEpreuves =  {  "Quitter le programme",
+								            "Rester le plus longtemps dans l'air", 
+		                              "Aller le plus loin possible",
+		                              "Parcourir la plus longue distance",
+		                              "Parcourir la plus longue distance sur un temps imparti",
+		                              "S'approcher le plus pres possible d'une cible",
+		                              "Atteindre plusieurs cibles",
+		                              "Suivre un parcours",
+		                              "Faire du sur place",
+                                    "Traversee de portes"};
 		System.out.println("\nFais ton choix \n==============\n");
 	
 		for(int compteurMenu=0; compteurMenu < listeEpreuves.length; compteurMenu++)
@@ -159,10 +159,10 @@ public class TraitementVol
 	}
     
 	public static void afficherEpreuve2(){
-		System.out.println("\nLe lieu le plus eloigne se trouve à "+ vol.pointLePlusLoin() );
-		System.out.println("\nSa distance en vol d'oiseau est de "+ vol.retourCoordonnees(0).distance(vol.pointLePlusLoin())+ "km" );
-		System.out.println("\nLa distance parcourue jusqu'à ce point est de "+ vol.distancePointMax()+ "km"  ) ;
-		System.out.println("\nTon vol a dure "+vol.dureePointMax()+ " unites temps jusqu'au point le plus eloigne");
+		System.out.println("\nLe lieu le plus eloigne se trouve a "  + vol.pointLePlusLoin() );
+		System.out.println("\nSa distance en vol d'oiseau est de " + vol.distanceCible( vol.pointDeDepart(),vol.pointLePlusLoin()) + "km" );
+		System.out.println("\nLa distance parcourue jusqu'a ce point est de " + vol.distanceParcourueAuPointMax() + "km"  ) ;
+		System.out.println("\nTon vol a dure "+vol.dureePointMax() + " unites temps jusqu'au point le plus eloigne");
 	}
 	
     public static void afficherEpreuve3(){
@@ -279,14 +279,14 @@ public class TraitementVol
    /**
 	 * Affiche les resultats de l'epreuve 9.
 	 * L'utilisateur definit des couples de cibles qui forme une porte.
-	 * Le planeur doit passer entre les portes pour obtenir des points
-	 * 
+	 * Le planeur doit passer entre les portes pour obtenir des points.
+	 * La methode renvoie le nombre de porte traversee . 
 	 */
 	public static void afficherEpreuve9()
 	{
-		Coordonnees[] portes = TraitementVol.creerParcours();
+		Coordonnees[] portes = creerParcours();
 		
-		System.out.println("\nNombre de porte franchie  :"+ " " + vol.traverseePortes( portes )+ " sur " +  ( portes.length/2 )  );
+		System.out.println("\nNombre de porte franchies  :"+ " " + vol.traverseePortes( portes )+ " sur " +  ( portes.length/2 )  );
 	}
 
 	/**
