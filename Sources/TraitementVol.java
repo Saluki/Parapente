@@ -133,7 +133,7 @@ public class TraitementVol
 	}
 	
 	/**
-	 * Demande un ensemble de coordonnees a l'utilisateur pour en suite
+	 * Demande un ensemble de coordonnees a l'utilisateur pour ensuite
 	 * creer un tableau avec toutes ses coordonnees.
 	 * 
 	 * @return     tableau de coordonnees
@@ -153,11 +153,50 @@ public class TraitementVol
 		
 		return cibles;
 	}
-	
+   
+   /**
+	 * Demande deux coordonnees par porte a l'utilisateur pour ensuite
+	 * creer un tableau avec toutes ses coordonnees.
+	 * 
+	 * @return     tableau de coordonnees
+	 */
+	public static Coordonnees[] creerParcoursPortes()
+	{
+		System.out.print("\nNombre de portes a declarer: ");
+		int nombreDePortes = Utilitaires.lireUnEntierComprisEntre(1,20);
+		
+		Coordonnees[] portes = new Coordonnees[nombreDePortes*2];
+		
+		for(int compteur=0; compteur < nombreDePortes*2; compteur++)
+		{	
+         if (compteur%2 == 0 ){
+   			System.out.println("\nDeclaration du point gauche de la porte #" + ((compteur/2)+1) );
+   			portes[compteur] = TraitementVol.lireCoordonnees();
+         }  else {
+               System.out.println("\nDeclaration du point droit de la porte #" + ((compteur/2)+1) );
+   			   portes[compteur] = TraitementVol.lireCoordonnees();
+            }      
+		}
+		
+		return portes;
+	}
+   
+	/**
+     * Affiche les resultats de l'epreuve 1.
+     * La methode calcule la duree du vol.
+     */
 	public static void afficherEpreuve1(){
 		System.out.println("\nTon vol a dure "+vol.duree()+ " unites temps.");
 	}
-    
+   
+   /**
+     * Affiche les resultats de l'epreuve 2.
+     * La methode donne :
+     * <ul><li>Les coordonnees du point le plus eloignee</li>
+     * <li>La distance en vol d'oiseau entre l'origine et le point le plus eloignee</li>
+     * <li>La distance reelle parcourue pour atteindre ce point</li>
+     * <li>La duree du vol jusqu'au point le plus eloignee</li>
+     */ 
 	public static void afficherEpreuve2(){
 		System.out.println("\nLe lieu le plus eloigne se trouve a "  + vol.pointLePlusLoin() );
 		System.out.println("\nSa distance en vol d'oiseau est de " + vol.distanceCible( vol.pointDeDepart(),vol.pointLePlusLoin()) + "km" );
@@ -165,6 +204,10 @@ public class TraitementVol
 		System.out.println("\nTon vol a dure "+vol.dureePointMax() + " unites temps jusqu'au point le plus eloigne");
 	}
 	
+   /**
+     * Affiche les resultats de l'epreuve 3.
+     * La methode calcule la distance totale du vol.
+     */
     public static void afficherEpreuve3(){
 		System.out.println("\nLa distance du vol est de "+vol.distance()+ " km.");
 	}
@@ -284,7 +327,7 @@ public class TraitementVol
 	 */
 	public static void afficherEpreuve9()
 	{
-		Coordonnees[] portes = creerParcours();
+		Coordonnees[] portes = creerParcoursPortes();
 		
 		System.out.println("\nNombre de porte franchies  :"+ " " + vol.traverseePortes( portes )+ " sur " +  ( portes.length/2 )  );
 	}

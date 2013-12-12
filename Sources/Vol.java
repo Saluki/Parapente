@@ -30,13 +30,19 @@ public class Vol
 	
 	/**
 	 * Cette methode renvoie la duree du vol jusqu'a la distance la plus eloignee
-	 * L'unitÃ© de temps correspond Ã  l'indice de la coordonnee
+	 * L'unite de temps correspond a l'indice de la coordonnee
 	 * @return la duree jusqu'au point max
 	 */
 	public int dureePointMax() {
 		return indiceDistanceMax();
 	}
 	
+   /**
+	 * Cette methode arrondi un nombre jusqu'a 4 chiffre.
+	 * 
+    * @param distance la distance a arondir
+	 * @return le double arrondi a 4 chiffre
+	 */
 	private double arrondir(double distance)
 	{
 		return Math.round(distance*10000.0)/10000.0;
@@ -45,6 +51,7 @@ public class Vol
    /**
 	 * Cette methode renvoie les coordonee de la table a l'indice choisi.
 	 * 
+    * @param indice indice des coordonnees 
 	 * @return les coordonees
 	 */
 	public Coordonnees retourCoordonnees(int indice) {
@@ -53,7 +60,8 @@ public class Vol
    
    /**
 	 * Cette methode renvoie les coordonnees du point de depart .
-	 * On utilise la methodes : retourCoordonnee a l'indice 0 
+	 * On utilise la methodes : retourCoordonnee a l'indice 0
+    *  
 	 * @return les coordonnees du point de depart 
 	 */
 	public Coordonnees pointDeDepart() {
@@ -63,15 +71,16 @@ public class Vol
    
    /**
 	 * Cette methode renvoie les coordonnees du lieux le plus eloigne .
-	 * On utilise deux methodes : retourCoordonnee et indiceDistanceMax 
-	 * @return les coordonnees les plus eloignes
+	 * On utilise deux methodes : retourCoordonnee et indiceDistanceMax
+    * 
+	 * @return les coordonnees du point le plus eloigne
 	 */
 	public Coordonnees pointLePlusLoin() {
 		return this.retourCoordonnees(this.indiceDistanceMax()) ;
 	}
 
 	/**
-	 * Cette methode calcule la distance parcourue. Cette distance sera
+	 * Cette methode calcule la distance totale du vol. Cette distance sera
 	 * obtenue en additionnant les distances des segments du vol memorise.
 	 * 
 	 * @return la distance parcourue
@@ -85,9 +94,10 @@ public class Vol
 	}
    
     /**
-	 * Cette methode calcule la distance parcourue jusqu'Ã  l'indice de la coordonnÃ©e voulu. Cette 
-	 * distance sera obtenue en additionnant les distances des segments du vol jusqu'Ã  l'indice demandÃ©.
+	 * Cette methode calcule la distance parcourue jusqu'a l'indice de la coordonnee voulu. Cette 
+	 * distance sera obtenue en additionnant les distances des segments du vol jusqu'a� l'indice demande
 	 * 
+    * @param indice indice des coordonnees choisies 
 	 * @return la distance parcourue
 	 */
 	public double distanceIndice(int indice) {
@@ -99,24 +109,11 @@ public class Vol
 	}
    
    /**
-	 * Cette methode calcule la distance la plus eloigne par rapport au point d'origine. Cette distance sera
-	 * obtenue en comparant tout les segements des coordonnees par rapport au point de depart et 
-	 * d'enregister le segment le plus grand .
-     *
-	 * @return la distance la plus longue par rapport au point de depart
-	 */
-   public double distanceMax()
-   {
-		//double distanceMax = 0;
-	   return 0.00;
-   }
-   
-   /**
-	 * Cette methode calcule la distance la plus Ã©loignÃ© par rapport au point d'origine. Cette distance sera
-	 * obtenue en comparant tout les segements des coordonÃ©es par rapport au point de dÃ©part . Ensuite nous 
+	 * Cette methode calcule la distance la plus eloignee par rapport au point d'origine. Cette distance sera
+	 * obtenue en comparant tout les segements des coordonnees par rapport au point de depart . Ensuite nous 
 	 * enregistrons l'indice du segment le plus grand .
     *
-	 * @return l'indice de la distance la plus longue Ã  vol d'oiseau par rapport au point de dÃ©part
+	 * @return l'indice de la distance la plus longue a vol d'oiseau par rapport au point de depart
 	 */
    public int indiceDistanceMax() {
 		double distanceMax = 0;
@@ -135,8 +132,9 @@ public class Vol
    
    
    /**
-	 * Cette methode renvoie la distance parcourue pour atteindre le plus le plus eloigne .
-	 * On utilise deux mÃ©thodes : distanceIndice et indiceDistanceMax 
+	 * Cette methode renvoie la distance parcourue pour atteindre le point le plus eloigne .
+	 * On utilise deux methodes : distanceIndice et indiceDistanceMax.
+    * 
 	 * @return distance parcourue jusqu'au point le plus eloigne 
 	 */
 	public double distanceParcourueAuPointMax() {
@@ -410,7 +408,8 @@ public class Vol
          
             if (  Coordonnees.segmentsCroises(portes[i], portes[i+1], this.tableCoordonnees[j], this.tableCoordonnees[j+1])) {
                point++ ;
-               croiser = true ;     
+               croiser = true ;
+               j-- ; // il se peut qu'on traverse plusieur porte sur un meme segment .    
             }
             j++ ;
          }
