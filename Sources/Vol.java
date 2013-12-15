@@ -54,7 +54,7 @@ public class Vol
     * @param indice indice des coordonnees 
 	 * @return les coordonees
 	 */
-	public Coordonnees retourCoordonnees(int indice) {
+	private Coordonnees retourCoordonnees(int indice) {
 		return this.tableCoordonnees[indice] ;
 	}
    
@@ -90,7 +90,7 @@ public class Vol
       for ( int i = 1 ; i < this.tableCoordonnees.length ; i++ ){
         distance = distance + this.tableCoordonnees[i].distance(this.tableCoordonnees[i-1]) ;
       }
-		return distance;
+		return arrondir(distance);
 	}
    
     /**
@@ -115,7 +115,7 @@ public class Vol
     *
 	 * @return l'indice de la distance la plus longue a vol d'oiseau par rapport au point de depart
 	 */
-   public int indiceDistanceMax() {
+   private int indiceDistanceMax() {
 		double distanceMax = 0;
       int indiceMax = 0 ;
      

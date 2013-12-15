@@ -198,7 +198,7 @@ public class TraitementVol
      * <li>La duree du vol jusqu'au point le plus eloignee</li>
      */ 
 	public static void afficherEpreuve2(){
-		System.out.println("\nLe lieu le plus eloigne se trouve a "  + vol.pointLePlusLoin() );
+		System.out.println("\nLe lieu le plus eloigne se trouve a "+ vol.pointLePlusLoin());
 		System.out.println("\nSa distance en vol d'oiseau est de " + vol.distanceCible( vol.pointDeDepart(),vol.pointLePlusLoin()) + "km" );
 		System.out.println("\nLa distance parcourue jusqu'a ce point est de " + vol.distanceParcourueAuPointMax() + "km"  ) ;
 		System.out.println("\nTon vol a dure "+vol.dureePointMax() + " unites temps jusqu'au point le plus eloigne");
